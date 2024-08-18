@@ -1,0 +1,90 @@
+.right-container {
+    background-color: #e7ebf3;
+    padding: 20px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #164478;
+        .add-folder{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            border: none;
+            background-color: #e7ebf3;
+            .btn-text{
+                padding-left: 10px;
+            }
+        }
+        .title{
+            font-size: 30px;
+            color: #164478;
+        }
+    }
+    .folder-container {
+        .folder-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #164478;
+            padding: 20px 0;
+            .folder-header-item {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                #folder {
+                    color: #164478;
+                }
+                button {
+                    background-color: #e7ebf3;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    .btn-text{
+                        padding-left: 7px;
+                    }
+                }
+            }
+        }
+        .cards-container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            .card {
+                display: flex;
+                border-radius: 10px;
+                box-shadow: 2px 2px 5px gray;
+                cursor: pointer;
+                border: none;
+                width: 43%;
+                gap: 10px;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px;
+                transition-duration: 0.3s;
+                .title-container {
+                    display: flex;
+                    flex-direction: column;
+
+                }
+                img {
+                    width: 50px;
+                }
+                .icons {
+                    display: flex;
+                    gap: 10px;
+                    cursor: pointer;
+                }
+
+            }
+            .card:hover {
+                width: 42%;
+                outline: 2px solid #e7ebf3;
+                box-shadow: 10px -10px 5px gray;
+            }
+        }
+
+    }
+
+}
