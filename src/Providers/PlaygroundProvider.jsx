@@ -38,7 +38,12 @@ const defaultCodes = {
 }
 
 export const PlaygroundProvider = ({children}) => {
-    const [folders, setFolders] = useState (initialData);
+    const [folders, setFolders] = useState(() => {
+        if(localStorage.getItem('data')){
+            return JSON.parse(localStorage.getItem('data'));
+        }
+        return initialData;
+    })
 
     const createNewBattlefield = (newBattlefield) => {
         const {fileName, folderName, language} = newBattlefield;
@@ -61,8 +66,10 @@ export const PlaygroundProvider = ({children}) => {
     }
 
     useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(folders));
 
+        if(!localStorage.getItem('data')){
+            localStorage.setItem('data', JSON.stringify(folders));
+        }
     }, [])
     const battlefieldFeatures = {
         folders,
