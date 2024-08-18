@@ -74,8 +74,17 @@ export const PlaygroundProvider = ({children}) => {
 
         const allFolders = [...folders, newFolder];
         folders.push(newFolder);
-        localStorage.setItem('data', allFolders);
+        localStorage.setItem('data', JSON.stringify(allFolders));
         setFolders(allFolders);
+    }
+
+    const deleteFolder = (id) => {
+        const updatedFoldersList = folders.filter ((folderItem) => {
+            return folderItem.id !== id;
+        })
+
+        localStorage.setItem('data', JSON.stringify(updatedFoldersList));
+        setFolders(updatedFoldersList);
     }
     useEffect(() => {
 
@@ -86,7 +95,8 @@ export const PlaygroundProvider = ({children}) => {
     const battlefieldFeatures = {
         folders,
         createNewBattlefield,
-        createNewFolder
+        createNewFolder,
+        deleteFolder
     }
     // const obj = {name: 'nandinee'};
     return (

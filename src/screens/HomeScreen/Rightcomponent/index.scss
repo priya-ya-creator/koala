@@ -1,6 +1,11 @@
 .right-container {
     background-color: #e7ebf3;
     padding: 20px;
+    height: 100vh;
+    overflow-y: scroll;
+    .material-symbols-outlined {
+        cursor: pointer;
+    }
     .header {
         display: flex;
         justify-content: space-between;
