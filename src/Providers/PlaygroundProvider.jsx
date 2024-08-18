@@ -65,6 +65,18 @@ export const PlaygroundProvider = ({children}) => {
         setFolders(newFolders);
     }
 
+    const createNewFolder = (folderName) => {
+        const newFolder= {
+            id: v4(),
+            title: folderName,
+            files: []
+        }
+
+        const allFolders = [...folders, newFolder];
+        folders.push(newFolder);
+        localStorage.setItem('data', allFolders);
+        setFolders(allFolders);
+    }
     useEffect(() => {
 
         if(!localStorage.getItem('data')){
@@ -73,7 +85,8 @@ export const PlaygroundProvider = ({children}) => {
     }, [])
     const battlefieldFeatures = {
         folders,
-        createNewBattlefield 
+        createNewBattlefield,
+        createNewFolder
     }
     // const obj = {name: 'nandinee'};
     return (

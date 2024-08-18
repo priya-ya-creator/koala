@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./index.scss";
 import { PlaygroundContext } from "../../../Providers/PlaygroundProvider";
+import { modalConstants, ModalContext } from "../../../Providers/ModalProvider";
 
 const Folder = ({folderTitle, cards}) => {
     return <div className="folder-container">
@@ -42,14 +43,19 @@ const Folder = ({folderTitle, cards}) => {
 }
 export const Rightcomponent = () => {
     const {folders} = useContext(PlaygroundContext);
+    const modalFeatures = useContext(ModalContext);
+
+    const openCreateNewFolderModal =() => {
+        modalFeatures.openModal(modalConstants.CREATE_FOLDER);
+    }
 
     return <div className="right-container">
         <div className="header">
             <h1 className="title"> Existing Battlefields</h1>
-            <div className="add-folder">
+            <button className="add-folder" onClick={openCreateNewFolderModal}>
                 <span class="material-symbols-outlined">swords</span>
                 <span className="btn-text">New Folder</span>
-            </div>
+            </button>
         </div>
         {
             folders?.map((folder, index) => {

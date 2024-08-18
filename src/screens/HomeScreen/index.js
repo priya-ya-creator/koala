@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { Modal } from "../../Providers/Modals/Modal";
 import "./index.scss"
 import { Rightcomponent } from "./Rightcomponent";
-import { ModalContext } from "../../Providers/ModalProvider";
+import { modalConstants, ModalContext } from "../../Providers/ModalProvider";
 
 export const HomeScreen = () => {
     const modalFeatures = useContext(ModalContext);
     const openCreateBattlefieldModal = () => {
-        modalFeatures.openModal("CREATE_BATTLEFIELD");
+        modalFeatures.openModal(modalConstants.CREATE_BATTLEFIELD);
     }
     return(
         <div className="home-container">
