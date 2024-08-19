@@ -1,4 +1,10 @@
 import "./EditorContainer.scss";
+import Editor from "@monaco-editor/react";
+
+const editorOptions = {
+    fontSize:16,
+    wordWrap: "on",
+}
 
 export const EditorContainer = () => {
     return (
@@ -25,6 +31,12 @@ export const EditorContainer = () => {
                 </div>
             </div>
             <div className="editor-body">
+                <Editor 
+                    height={"100%"}
+                    language={"python"}
+                    options={editorOptions}
+                    theme={'vs-dark'}
+                />
 
             </div>
             <div className="editor-footer">
