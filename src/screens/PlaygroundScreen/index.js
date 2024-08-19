@@ -49,7 +49,7 @@ export const PlaygroundScreen = () => {
             {/* < EditorContainer /> */}
             <div className="content-container">
                 <div className="editor-container">
-                    <EditorContainer />
+                    <EditorContainer fileId={fileId} folderId={folderId}/>
                 </div>
                     <div className="input-container">
                         <div className="input-header">
