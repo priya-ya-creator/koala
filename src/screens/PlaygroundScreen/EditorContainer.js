@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./EditorContainer.scss";
 import Editor from "@monaco-editor/react";
 
@@ -7,6 +8,31 @@ const editorOptions = {
 }
 
 export const EditorContainer = () => {
+
+    const [code, setCode] = useState('');
+
+    const onChangeCode = (newcode) => {
+        // console.log({newCode})
+    }
+
+    const onUploadCode = (event) => {
+        const file = event.target.files[0];
+        const fileType = file.type.includes("text")
+        // console.log({fileType})
+        if(fileType){
+            const blob = new Blob([file]);
+            const fileReader = new FileReader();
+            fileReader.readAsText(blob);
+            fileReader.onload = function(value){
+                const importedCode = value.target.result;
+                setCode(importedCode);
+            }
+        }
+        else {
+            alert ("Upload a text file!!")
+        }
+
+    }
     return (
         <div className="root-editor-container">
             <div className="editor-header">
@@ -36,6 +62,8 @@ export const EditorContainer = () => {
                     language={"python"}
                     options={editorOptions}
                     theme={'vs-dark'}
+                    onChange={onChangeCode}
+                    value={code}
                 />
 
             </div>
@@ -48,7 +76,7 @@ export const EditorContainer = () => {
                     <span className="material-symbols-outlined">cloud_upload</span>
                     <span>Import Code</span>
                 </label>
-                <input type="file" id="import-code" style={{display: 'none'}} />
+                <input type="file" id="import-code" style={{display: 'none'}} onChange={onUploadCode} />
                 <button className="btn">
                     <span className="material-symbols-outlined">cloud_download</span>
                     <span>Export Code</span>
