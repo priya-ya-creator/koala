@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./EditorContainer.scss";
 import Editor from "@monaco-editor/react";
 
@@ -7,12 +7,26 @@ const editorOptions = {
     wordWrap: "on",
 }
 
+const fileExtensionMapping = {
+    cpp: 'cpp',
+    javascript: 'js',
+    python: 'py',
+    java: 'java',
+    html: 'html'
+}
+
 export const EditorContainer = () => {
 
     const [code, setCode] = useState('');
+    const [language, setLanguage] = useState("cpp");
+    const [theme, setTheme] = useState('vs-dark');
+    const codeRef = useRef();
+    // console.log(codeRef);
 
-    const onChangeCode = (newcode) => {
+    const onChangeCode = (newCode) => {
         // console.log({newCode})
+        // setCode(newCode);
+        codeRef.current=newCode;
     }
 
     const onUploadCode = (event) => {
@@ -33,6 +47,31 @@ export const EditorContainer = () => {
         }
 
     }
+
+    const exportCode  = () => {
+        // console.log(codeRef.current);
+        const codeValue=codeRef.current?.trim();
+        if(!codeValue){
+            alert("No code to export!!");
+        }
+
+        const codeBlob = new Blob([codeValue], {type: "text/plain"});
+        const downloadUrl = URL.createObjectURL(codeBlob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = `code.${fileExtensionMapping[language]}`;
+        link.click();
+
+    }
+
+    const onChangeLanguage = (e) => {
+        setLanguage(e.target.value);   
+    }
+
+    const onChangeTheme = (e) => {
+        setTheme(e.target.value);
+    }
+
     return (
         <div className="root-editor-container">
             <div className="editor-header">
@@ -42,7 +81,7 @@ export const EditorContainer = () => {
                     <button>Save Code</button>
                 </div>
                 <div className="ediotr-right-container">
-                    <select>
+                    <select onChange={onChangeLanguage} value={language} >
                         <option value="cpp">CPP</option>
                         <option value="java">Java</option>
                         <option value="python">Python</option>
@@ -50,7 +89,7 @@ export const EditorContainer = () => {
                         <option value="javascript">Javascript</option>
                     </select>
 
-                    <select>
+                    <select onChange={onChangeTheme} value={theme}>
                     <option value="dark">Dark</option>
                     <option value="light">Light</option>
                     </select>
@@ -59,9 +98,9 @@ export const EditorContainer = () => {
             <div className="editor-body">
                 <Editor 
                     height={"100%"}
-                    language={"python"}
+                    language={language}
                     options={editorOptions}
-                    theme={'vs-dark'}
+                    theme={theme}
                     onChange={onChangeCode}
                     value={code}
                 />
@@ -77,7 +116,7 @@ export const EditorContainer = () => {
                     <span>Import Code</span>
                 </label>
                 <input type="file" id="import-code" style={{display: 'none'}} onChange={onUploadCode} />
-                <button className="btn">
+                <button className="btn" onClick={exportCode}>
                     <span className="material-symbols-outlined">cloud_download</span>
                     <span>Export Code</span>
                 </button>
