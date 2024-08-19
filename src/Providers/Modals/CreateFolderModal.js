@@ -22,16 +22,16 @@ export const CreateFolderModal = () => {
         <form className="modal-body" onSubmit={onSubmitModal}>
             <span onClick={closeModal} class="material-symbols-outlined">close</span>
             <h1>Create New Folder</h1>
-            <div style={styles.inputContainer}>
-            <input name="folderName" style={styles.input} placeholder="Enter Folder Name"/>
-            <button style={styles.btn} type="submit">Create Folder</button>
+            <div style={createFolderStyles.inputContainer}>
+            <input name="folderName" style={createFolderStyles.input} placeholder="Enter Folder Name"/>
+            <button style={createFolderStyles.btn} type="submit">Create Folder</button>
             </div>
         </form>
 
     </div>
 }
 
-const styles =  {
+export const createFolderStyles =  {
     inputContainer: {
         display: 'flex',
         gap: 10

@@ -43,8 +43,7 @@ export const PlaygroundProvider = ({children}) => {
             return JSON.parse(localStorage.getItem('data'));
         }
         return initialData;
-    })
-
+    });
     const createNewBattlefield = (newBattlefield) => {
         const {fileName, folderName, language} = newBattlefield;
         const newFolders = [...folders];
@@ -86,6 +85,17 @@ export const PlaygroundProvider = ({children}) => {
         localStorage.setItem('data', JSON.stringify(updatedFoldersList));
         setFolders(updatedFoldersList);
     }
+
+    const editFolderTitle = (newFolderName, id) => {
+        const updatedFoldersList = folders.map ((folderItem) => {
+            if(folderItem.id === id) {
+                folderItem.title = newFolderName;
+            }
+            return folderItem;
+        })
+        localStorage.setItem('data', JSON.stringify(updatedFoldersList));
+        setFolders(updatedFoldersList);
+    }
     useEffect(() => {
 
         if(!localStorage.getItem('data')){
@@ -96,7 +106,8 @@ export const PlaygroundProvider = ({children}) => {
         folders,
         createNewBattlefield,
         createNewFolder,
-        deleteFolder
+        deleteFolder,
+        editFolderTitle
     }
     // const obj = {name: 'nandinee'};
     return (

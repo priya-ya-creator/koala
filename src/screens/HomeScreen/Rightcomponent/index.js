@@ -6,9 +6,15 @@ import { modalConstants, ModalContext } from "../../../Providers/ModalProvider";
 const Folder = ({folderTitle, cards, id}) => {
 
     const {deleteFolder} = useContext(PlaygroundContext);
+    const {openModal, setModalPayload} = useContext(ModalContext);
 
     const onDeleteFolder = () => {
         deleteFolder(id);
+    };
+
+    const onEditFolderTitle = () => {
+        setModalPayload(id);
+        openModal(modalConstants.UPDATE_FOLDER_TITLE);
     };
     return <div className="folder-container">
             <div className="folder-header">
@@ -18,7 +24,7 @@ const Folder = ({folderTitle, cards, id}) => {
                 </div>
                 <div className="folder-header-item">
                     <span class="material-symbols-outlined" onClick={onDeleteFolder}>folder_delete</span>
-                    <span class="material-symbols-outlined">edit_square</span>
+                    <span class="material-symbols-outlined" onClick={onEditFolderTitle}>edit_square</span>
                     <button>
                         <span class="material-symbols-outlined">swords</span>
                         <span className="btn-text">New Folder</span>
