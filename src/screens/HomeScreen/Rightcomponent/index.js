@@ -17,6 +17,11 @@ const Folder = ({folderTitle, cards, folderId}) => {
         openModal(modalConstants.UPDATE_FOLDER_TITLE);
     };
 
+    const openCreateCardModal = () => {
+        setModalPayload(folderId);
+        openModal(modalConstants.CREATE_CARD);
+    }
+
     
     return <div className="folder-container">
             <div className="folder-header">
@@ -27,9 +32,9 @@ const Folder = ({folderTitle, cards, folderId}) => {
                 <div className="folder-header-item">
                     <span class="material-symbols-outlined" onClick={onDeleteFolder}>folder_delete</span>
                     <span class="material-symbols-outlined" onClick={onEditFolderTitle}>edit_square</span>
-                    <button>
+                    <button onClick={openCreateCardModal}>
                         <span class="material-symbols-outlined">swords</span>
-                        <span className="btn-text">New Folder</span>
+                        <span className="btn-text">New Battlefield</span>
                     </button>
 
                 </div>

@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import {v4} from 'uuid';
 export const PlaygroundContext = createContext();
+
 const initialData = [
     {
         id: v4(),
@@ -29,7 +30,7 @@ const initialData = [
 
     }
 ];
-const defaultCodes = {
+export const defaultCodes = {
     ['cpp']: `cout<<"hello world";`,
     ['javascript']: `console.log("hello world");`,
     ['python']: `print("hello world")`,
@@ -132,6 +133,18 @@ export const PlaygroundProvider = ({children}) => {
         localStorage.setItem('data', JSON.stringify(copiedFolders));
         setFolders(copiedFolders);
     }
+
+    const createBattlefield = (folderId, file) => {
+        const copiedFolders  = [...folders]
+        for (let i=0; i<copiedFolders.length; i++) {
+            if(copiedFolders[i].id === folderId) {
+                copiedFolders[i].files.push(file);
+                break;
+            }
+        }
+        localStorage.setItem('data', JSON.stringify(copiedFolders));
+        setFolders(folders);
+    }
     useEffect(() => {
 
         if(!localStorage.getItem('data')){
@@ -145,7 +158,8 @@ export const PlaygroundProvider = ({children}) => {
         deleteFolder,
         editFolderTitle,
         editFileTitle,
-        deleteFile
+        deleteFile,
+        createBattlefield
     }
     // const obj = {name: 'nandinee'};
     return (

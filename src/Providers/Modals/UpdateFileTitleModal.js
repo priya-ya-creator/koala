@@ -10,7 +10,7 @@ export const UpdateFileTitleModal = () => {
     const onSubmitModal = (e) => {
         e.preventDefault();
         const fileName=e.target.fileName.value;
-        editFileTitle(fileName, modalPayload.folderId, modalPayload.fileId);
+        editFileTitle(fileName, modalPayload.fileId, modalPayload.folderId);
         closeModal();
 
     }
