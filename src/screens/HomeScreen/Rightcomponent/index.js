@@ -2,11 +2,13 @@ import { useContext } from "react";
 import "./index.scss";
 import { PlaygroundContext } from "../../../Providers/PlaygroundProvider";
 import { modalConstants, ModalContext } from "../../../Providers/ModalProvider";
+import { useNavigate } from "react-router-dom";
 
 const Folder = ({folderTitle, cards, folderId}) => {
 
     const {deleteFolder, deleteFile} = useContext(PlaygroundContext);
     const {openModal, setModalPayload} = useContext(ModalContext);
+    const navigate = useNavigate();
 
     const onDeleteFolder = () => {
         deleteFolder(folderId);
@@ -49,8 +51,13 @@ const Folder = ({folderTitle, cards, folderId}) => {
                     const onDeleteFile = () => {
                         deleteFile(folderId, file.id);
                     };
+
+                    const navigateToBattlefieldScreen = () => {
+                        // console.log({fileId:file.id}, {folderId});
+                        navigate(`/battlefield/${file.id}/${folderId}`);
+                    }
                     return (
-                        <div className="card" key={index}>
+                        <div className="card" key={index} onClick={navigateToBattlefieldScreen}>
                             <img src="koalaf.png" alt="koala" className="koala-img"/>
                             <div className="title-container">
                                 <span>{file?.title}</span>
