@@ -5,7 +5,8 @@ export const ModalContext=createContext();
 export const modalConstants = {
     CREATE_BATTLEFIELD: 'CREATE_BATTLEFIELD',
     CREATE_FOLDER: 'CREATE_FOLDER',
-    UPDATE_FOLDER_TITLE: 'UPDATE_FOLDER_TITLE'
+    UPDATE_FOLDER_TITLE: 'UPDATE_FOLDER_TITLE',
+    UPDATE_FILE_TITLE: 'UPDATE_FILE_TITLE'
 }
 
 export const ModalProvider = ({children}) => {

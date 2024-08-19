@@ -3,17 +3,17 @@ import "./index.scss";
 import { PlaygroundContext } from "../../../Providers/PlaygroundProvider";
 import { modalConstants, ModalContext } from "../../../Providers/ModalProvider";
 
-const Folder = ({folderTitle, cards, id}) => {
+const Folder = ({folderTitle, cards, folderId}) => {
 
     const {deleteFolder} = useContext(PlaygroundContext);
     const {openModal, setModalPayload} = useContext(ModalContext);
 
     const onDeleteFolder = () => {
-        deleteFolder(id);
+        deleteFolder(folderId);
     };
 
     const onEditFolderTitle = () => {
-        setModalPayload(id);
+        setModalPayload(folderId);
         openModal(modalConstants.UPDATE_FOLDER_TITLE);
     };
     return <div className="folder-container">
@@ -35,6 +35,10 @@ const Folder = ({folderTitle, cards, id}) => {
         <div className="cards-container">
             {
                 cards?.map((file, index) => {
+                    const onEditFile = () => {
+                        setModalPayload({fileId: file.id, folderId: folderId});
+                        openModal(modalConstants.UPDATE_FILE_TITLE);
+                    }
                     return (
                         <div className="card" key={index}>
                             <img src="koalaf.png" alt="koala" className="koala-img"/>
@@ -44,7 +48,7 @@ const Folder = ({folderTitle, cards, id}) => {
                             </div>
                             <div className="icons">
                                 <span class="material-symbols-outlined">delete</span>
-                                <span class="material-symbols-outlined">edit</span>
+                                <span class="material-symbols-outlined" onClick={onEditFile}>edit</span>
                             </div>
                         </div>
                     );
@@ -71,7 +75,7 @@ export const Rightcomponent = () => {
         </div>
         {
             folders?.map((folder, index) => {
-                return <Folder folderTitle={folder?.title} cards={folder?.files} key={index} id={folder.id}/>
+                return <Folder folderTitle={folder?.title} cards={folder?.files} key={index} folderId={folder.id}/>
             })
         }
         

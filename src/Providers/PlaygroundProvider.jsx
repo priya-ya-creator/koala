@@ -96,6 +96,26 @@ export const PlaygroundProvider = ({children}) => {
         localStorage.setItem('data', JSON.stringify(updatedFoldersList));
         setFolders(updatedFoldersList);
     }
+
+    const editFileTitle = (newFileName, folderId, fileId) => {
+        const copiedFolders = [...folders];
+        for (let i =0; i<copiedFolders.length; i++) {
+            if(folderId === copiedFolders[i].id){
+                const files = copiedFolders[i].files;
+                for(let j = 0; j<files.length; j++) {
+                    if(files[i].id === fileId){
+                        files[i].title = newFileName;
+                        break;
+
+                    }
+                }
+                break;
+            }
+            localStorage.setItem('data', JSON.stringify(copiedFolders));
+            setFolders(copiedFolders);
+        }
+
+    }
     useEffect(() => {
 
         if(!localStorage.getItem('data')){
@@ -107,7 +127,8 @@ export const PlaygroundProvider = ({children}) => {
         createNewBattlefield,
         createNewFolder,
         deleteFolder,
-        editFolderTitle
+        editFolderTitle,
+        editFileTitle
     }
     // const obj = {name: 'nandinee'};
     return (
