@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { EditorContainer } from "./EditorContainer";
 import "./index.scss";
 
 
@@ -13,7 +14,8 @@ export const PlaygroundScreen = () => {
             </div>
             {/* < EditorContainer /> */}
             <div className="content-container">
-                <div className="editor-container">Editor Container
+                <div className="editor-container">
+                    <EditorContainer />
                 </div>
                     <div className="input-container">
                         <div className="input-header">
