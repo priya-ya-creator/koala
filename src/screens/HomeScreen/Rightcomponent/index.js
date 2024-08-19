@@ -5,7 +5,7 @@ import { modalConstants, ModalContext } from "../../../Providers/ModalProvider";
 
 const Folder = ({folderTitle, cards, folderId}) => {
 
-    const {deleteFolder} = useContext(PlaygroundContext);
+    const {deleteFolder, deleteFile} = useContext(PlaygroundContext);
     const {openModal, setModalPayload} = useContext(ModalContext);
 
     const onDeleteFolder = () => {
@@ -16,6 +16,8 @@ const Folder = ({folderTitle, cards, folderId}) => {
         setModalPayload(folderId);
         openModal(modalConstants.UPDATE_FOLDER_TITLE);
     };
+
+    
     return <div className="folder-container">
             <div className="folder-header">
                 <div className="folder-header-item">
@@ -38,7 +40,10 @@ const Folder = ({folderTitle, cards, folderId}) => {
                     const onEditFile = () => {
                         setModalPayload({fileId: file.id, folderId: folderId});
                         openModal(modalConstants.UPDATE_FILE_TITLE);
-                    }
+                    };
+                    const onDeleteFile = () => {
+                        deleteFile(folderId, file.id);
+                    };
                     return (
                         <div className="card" key={index}>
                             <img src="koalaf.png" alt="koala" className="koala-img"/>
@@ -47,7 +52,7 @@ const Folder = ({folderTitle, cards, folderId}) => {
                                 <span>Language: {file?.language}</span>
                             </div>
                             <div className="icons">
-                                <span class="material-symbols-outlined">delete</span>
+                                <span class="material-symbols-outlined" onClick={onDeleteFile}  >delete</span>
                                 <span class="material-symbols-outlined" onClick={onEditFile}>edit</span>
                             </div>
                         </div>
